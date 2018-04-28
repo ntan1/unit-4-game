@@ -30,19 +30,21 @@ $(document).ready(function () {
             // not working as intended yet
             // $.data(this, 'cHeight', $this.find("figcaption").outerHeight());
             $(this).find("figcaption").stop(true, false).animate({
-                height: '100%'
+                //height: '100%'
             });
         },
         function () {
             $(this).find("figcaption").stop(true, false).animate({
                 // height: $.data(this, 'cHeight')
-                height: captionHeight
+                //height: captionHeight
             });
         }
     );
 
-    $(".character-portrait").on("click", function() {
+    $("#character-selection").on("click", ".character-portrait", function() {
         $(".arena").append(this);
+        $("#select").fadeOut(1);
+        $("#select").text("Select an opponent").fadeIn(1000);
     });
 });
 
