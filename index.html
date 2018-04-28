@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RPG Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+</head>
+
+<body id="main">
+    <div class="header container-fluid">
+        <div class="container">
+            <div class="row">
+                <div>
+                    Showdown
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="board" class="container">
+        <h1>RPG Game</h1>
+        <div class="instructions">
+            <h1>Instructions</h1>
+            <p>Select character. Press attack button. Win.</p>
+        </div>
+        <!-- <div id="game-board"> -->
+        <div class="character-selection">
+            <h2>Select Your Character</h2>
+            <div class="row">
+                <div id="char1" class="character-portrait col-sm-6 col-md-6 col-lg-3">
+                    <figure>
+                        <img src="assets/images/zen.png">
+                        <figcaption>char1</figcaption>
+                    </figure>
+                </div>
+                <div id="char2" class="character-portrait col-sm-6 col-md-6 col-lg-3">
+                    <figure>
+                        <img src="assets/images/zen.png">
+                        <figcaption>char2</figcaption>
+                    </figure>
+                </div>
+                <div id="char3" class="character-portrait col-sm-6 col-md-6 col-lg-3">
+                    <figure>
+                        <img src="assets/images/zen.png">
+                        <figcaption>char3</figcaption>
+                    </figure>
+                </div>
+                <div id="char4" class="character-portrait col-sm-6 col-md-6 col-lg-3">
+                    <figure>
+                        <img src="assets/images/zen.png">
+                        <figcaption>char4</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <h1>Arena</h1>
+            <div class="row text-center arena">
+                <!-- <div class="col-5">
+                    <h2>Your Character</h2>
+                </div>
+                <div class="col-2">
+                    <h2>Vs.</h2>
+                </div>
+                <div class="col-5">
+                    <h2>This Guy</h2>
+                </div> -->
+                <div id="char7" class="character-portrait col-sm-6 col-md-6 col-lg-3">
+                    <figure>
+                        <img src="assets/images/zen.png">
+                        <figcaption>char1</figcaption>
+                    </figure>
+                    <button id="attack-btn" class="">attack</button>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js"></script>
+</body>
+
+</html>
