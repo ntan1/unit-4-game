@@ -8,10 +8,9 @@ $(document).ready(function () {
         if (!(this instanceof Character)) { // scope-safe constructor in case called without new
             return new Character(name, hp, attack);
         }
-        this.name = name,
-            this.hp = hp,
-            this.attack = attack,
-            this.defenderArea = false
+        this.name = name;
+        this.hp = hp;
+        this.attack = attack;
     }
 
 
@@ -41,10 +40,25 @@ $(document).ready(function () {
         }
     );
 
-    $("#character-selection").on("click", ".character-portrait", function() {
-        $(".arena").append(this);
-        $("#select").fadeOut(1);
-        $("#select").text("Select an opponent").fadeIn(1000);
+    var mainChar;
+    var opponent;
+    $("#character-selection").on("click", ".character-portrait", function () {
+        if (mainChar && !opponent) {
+            console.log(this);
+            opponent = new Character($(this).data(name), $(this).data(hp), $(this).data(attack));
+            $(".arena").append(this);
+            $("#select").fadeOut(1);
+            $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
+            console.log("Your opponent is " + opponent);
+        } else if (!mainChar) {
+            console.log(this);
+            mainChar = new Character($(this).dataset.name, $(this).dataset.hp, $(this).dataset.attack);
+            $(this).append("<button>Attac</button>");
+            $(".arena").append(this);
+            $("#select").fadeOut(1);
+            $("#select").text("Select an opponent").stop(true, true).fadeIn(1000);
+            console.log("You chose " + mainChar);
+        }
     });
 });
 
