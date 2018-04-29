@@ -11,54 +11,87 @@ $(document).ready(function () {
         this.name = name;
         this.hp = hp;
         this.attack = attack;
+        this.numOfAttacks = 1;
+        this.audio = {
+            lose: new Audio("assets/sounds/Dark Souls Death.mp3")
+        };
+        this.getAtkPwr = function () {
+            return this.numOfAttacks * attack;
+        }
     }
 
 
     var char7 = $("#char7");
-    var attkBtn = $("#attack-btn");
-    attkBtn.on("click", function () {
-        char7.attr("class", "character-portrait col-6");
-    });
 
     // store original height of figcaption in global var as workaround
-    var captionHeight = $(".character-portrait").find("figcaption").outerHeight();
-    $(".character-portrait").hover(
+    var captionHeight = $(".character").find("figcaption").outerHeight();
+    $(".character").find("figure").hover(
         function () {
-            // var $this = $(this);
+            var $this = $(this);
             // store original height of figcaption in $ function for mouseleave function
-            // not working as intended yet
-            // $.data(this, 'cHeight', $this.find("figcaption").outerHeight());
-            $(this).find("figcaption").stop(true, false).animate({
-                //height: '100%'
+            // not working as intended yet on animate, css() no problem
+            $.data(this, 'cHeight', $this.find("figcaption").outerHeight());
+            $(this).find("figcaption").stop(true, false).css({
+                height: '100%'
             });
         },
         function () {
-            $(this).find("figcaption").stop(true, false).animate({
-                // height: $.data(this, 'cHeight')
-                //height: captionHeight
+            $(this).find("figcaption").stop(true, false).css({
+                height: $.data(this, 'cHeight')
+                // height: captionHeight
             });
         }
     );
 
-    var mainChar;
-    var opponent;
-    $("#character-selection").on("click", ".character-portrait", function () {
+    var mainChar = "";
+    var opponent = "";
+    $("#character-selection").on("click", ".character", function () {
         if (mainChar && !opponent) {
-            console.log(this);
-            opponent = new Character($(this).data(name), $(this).data(hp), $(this).data(attack));
+            opponent = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
+            $(this).addClass("defender");
             $(".arena").append(this);
             $("#select").fadeOut(1);
             $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
-            console.log("Your opponent is " + opponent);
+            console.log("Your opponent is " + opponent.name);
         } else if (!mainChar) {
-            console.log(this);
-            mainChar = new Character($(this).dataset.name, $(this).dataset.hp, $(this).dataset.attack);
-            $(this).append("<button>Attac</button>");
+            mainChar = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
+            $(this).addClass("attacker");
+            $(this).append("<button id='attack-button'>Attack</button>");
             $(".arena").append(this);
             $("#select").fadeOut(1);
             $("#select").text("Select an opponent").stop(true, true).fadeIn(1000);
-            console.log("You chose " + mainChar);
+            console.log("You chose " + mainChar.name);
         }
     });
+
+    // delegate click event to parent of created button rather than button itself
+    $("#board").on("click", "#attack-button", function () {
+        $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage");
+        $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage");
+        fight();
+        updateBoard();
+        mainChar.numOfAttacks++;
+    });
+
+    function fight() {
+        mainChar.hp -= opponent.getAtkPwr();
+        opponent.hp -= mainChar.getAtkPwr();
+        if (mainChar.hp <= 0) {
+            console.log("you lose");
+            mainChar.audio.lose.play();
+            // mainChar.audio.lose.currentTime = 0;
+        }
+        if (opponent.hp <= 0) {
+            console.log(opponent.name + " has been defeated");
+            opponent = "";
+            $(".defender").remove();
+        }
+    }
+
+    function updateBoard() {
+        $(".attacker").find(".hp").text(mainChar.hp);
+        $(".defender").find(".hp").text(opponent.hp);
+    }
+
 });
 
