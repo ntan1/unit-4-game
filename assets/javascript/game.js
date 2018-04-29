@@ -1,3 +1,6 @@
+// To do: Rename vars to be more consistent
+// To do: Add music loop
+
 $(document).ready(function () {
     var aragorn = new Character("Aragorn", 100, 6);
     var boromir = new Character("Boromir", 120, 4);
@@ -20,7 +23,10 @@ $(document).ready(function () {
         }
     }
 
-
+    // find shorter length
+    // var fightMusic = $("audio");
+    $("#fight-music")[0].volume = 0.5;
+    // fightMusic.play();
     var char7 = $("#char7");
 
     // store original height of figcaption in global var as workaround
@@ -78,6 +84,7 @@ $(document).ready(function () {
         opponent.hp -= mainChar.getAtkPwr();
         if (mainChar.hp <= 0) {
             console.log("you lose");
+            $("audio").animate({ volume: 0 }, 1000);
             mainChar.audio.lose.play();
             // mainChar.audio.lose.currentTime = 0;
         }
