@@ -2,7 +2,6 @@
 // To do: Style pause and volume buttons for audio
 // To do: bonfire responsive
 // To do: consistent image sizes
-// To do: reset banner msgs on animation end
 // To do: arena styling, text
 
 $(document).ready(function () {
@@ -132,15 +131,13 @@ $(document).ready(function () {
             $("#victory").text(opponent.name + " has fallen");
             $("#victory").css({ display: "block" });
             $("#victory").animate({
-                opacity: 1,
-                "font-size": "5em"
+                opacity: 1
             }, 1500,
                 function () {
                     $("#victory").animate({
                         opacity: 0
                     }, 1500);
                 });
-            $("#victory").css({ "font-size": "4em" });
             opponent = "";
             $(".defender").remove();
         }
