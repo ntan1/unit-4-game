@@ -1,12 +1,14 @@
 // To do: Rename vars to be more consistent
-// To do: Add music loop
+// To do: Style pause and volume buttons for audio
+// To do: bonfire responsive
+// To do: consistent image sizes
+// To do: reset banner msgs on animation end
+// To do: arena styling, text
 
 $(document).ready(function () {
-    var aragorn = new Character("Aragorn", 100, 6);
-    var boromir = new Character("Boromir", 120, 4);
-    var gimli = new Character("Gimli", 150, 8);
-    var witch_king = new Character("Witch King", 150, 10);
-
+    var mainChar = "";
+    var opponent = "";
+    
     function Character(name, hp, attack) {
         if (!(this instanceof Character)) { // scope-safe constructor in case called without new
             return new Character(name, hp, attack);
@@ -16,18 +18,38 @@ $(document).ready(function () {
         this.attack = attack;
         this.numOfAttacks = 1;
         this.audio = {
-            lose: new Audio("assets/sounds/Dark Souls Death.mp3")
+            lose: new Audio("assets/sounds/Dark Souls Death.mp3"),
+            // win: new Audio("assets/sounds/Dark Souls Estus Flask.mp3")
+            win: new Audio("assets/sounds/ds3va.mp3"),
+            complete: new Audio("assets/sounds/vg.mp3")
         };
         this.getAtkPwr = function () {
             return this.numOfAttacks * attack;
         }
     }
 
+    // banner class
+    function Banner(banner) {
+
+    }
+
+    // set name and hp text on characters from data attributes
+    $("#character-selection").find(".character").each(function() {
+        console.log($(this).data("name"));
+        var hpText = "<div class='hp'>" + $(this).data("hp") + "</div>"
+        $(this).find("figcaption").prepend($(this).data("name") + hpText);
+    });
+
     // find shorter length
-    // var fightMusic = $("audio");
-    $("#fight-music")[0].volume = 0.5;
+    var fightMusic = $("#fight-music");
+    fightMusic[0].volume = 0.3;
     // fightMusic.play();
     var char7 = $("#char7");
+
+    // refresh page when bonfire clicked
+    $("#bonfire").on("click", function () {
+        document.location.reload();
+    });
 
     // store original height of figcaption in global var as workaround
     var captionHeight = $(".character").find("figcaption").outerHeight();
@@ -40,17 +62,17 @@ $(document).ready(function () {
             $(this).find("figcaption").stop(true, false).css({
                 height: '100%'
             });
+            $(this).find(".flavour-text").show();
         },
         function () {
             $(this).find("figcaption").stop(true, false).css({
                 height: $.data(this, 'cHeight')
                 // height: captionHeight
             });
+            $(this).find(".flavour-text").hide();
         }
     );
 
-    var mainChar = "";
-    var opponent = "";
     $("#character-selection").on("click", ".character", function () {
         if (mainChar && !opponent) {
             opponent = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
@@ -70,35 +92,64 @@ $(document).ready(function () {
         }
     });
 
-    // delegate click event to parent of created button rather than button itself
+    // delegate parent to find created button rather than button itself cause can't target created elements directly
     $("#board").on("click", "#attack-button", function () {
-        $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage");
-        $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage");
-        fight();
+        if (opponent && mainChar.hp > 0) {
+            $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage");
+            $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage");
+            fight();
+        } else if (mainChar.hp <= 0) {
+            $("#atkText").text("You have lost.");
+        } else {
+            $("#atkText").text("No opponent found");
+        }
         updateBoard();
-        mainChar.numOfAttacks++;
     });
 
+    // handle attacker and defender attacks and hp deductions
     function fight() {
         mainChar.hp -= opponent.getAtkPwr();
         opponent.hp -= mainChar.getAtkPwr();
-        if (mainChar.hp <= 0) {
+        mainChar.numOfAttacks++;
+        if (mainChar.hp <= 0) { // you died
+            mainChar.hp = 0;
             console.log("you lose");
-            $("audio").animate({ volume: 0 }, 1000);
+            fightMusic.animate({ volume: 0 }, 1000);
+            fightMusic.trigger("pause");
             mainChar.audio.lose.play();
             // mainChar.audio.lose.currentTime = 0;
+            $("#died").css({ display: "block" });
+            $("#died").animate({
+                opacity: 1,
+                "font-size": "5em"
+            }, 2000);
         }
-        if (opponent.hp <= 0) {
+        if (opponent.hp <= 0) { // killed opponent
             console.log(opponent.name + " has been defeated");
+            opponent.hp = 0;
+            mainChar.audio.win.play();
+            mainChar.audio.win.currentTime = 0;
+            $("#victory").text(opponent.name + " has fallen");
+            $("#victory").css({ display: "block" });
+            $("#victory").animate({
+                opacity: 1,
+                "font-size": "5em"
+            }, 1500,
+                function () {
+                    $("#victory").animate({
+                        opacity: 0
+                    }, 1500);
+                });
+            $("#victory").css({ "font-size": "4em" });
             opponent = "";
             $(".defender").remove();
         }
     }
 
+    // update hp text
     function updateBoard() {
         $(".attacker").find(".hp").text(mainChar.hp);
         $(".defender").find(".hp").text(opponent.hp);
     }
-
 });
 
