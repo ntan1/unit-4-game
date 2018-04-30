@@ -40,6 +40,13 @@ figcaption {
     font-family: times;
 }
 
+.background-fire {
+    position: absolute;
+    width: 50%;
+    z-index: -1;
+    transform: rotate(180deg);
+}
+
 .character {
     overflow: hidden;
 }

@@ -76,7 +76,9 @@ $(document).ready(function () {
         if (mainChar && !opponent) {
             opponent = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
             $(this).addClass("defender");
+            $(this).hide();
             $(".arena").append(this);
+            $(this).show("normal");
             $("#select").fadeOut(1);
             $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
             console.log("Your opponent is " + opponent.name);
@@ -84,7 +86,9 @@ $(document).ready(function () {
             mainChar = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
             $(this).addClass("attacker");
             $(this).append("<button id='attack-button'>Attack</button>");
+            $(this).hide();
             $(".arena").append(this);
+            $(this).show("normal");
             $("#select").fadeOut(1);
             $("#select").text("Select an opponent").stop(true, true).fadeIn(1000);
             console.log("You chose " + mainChar.name);
