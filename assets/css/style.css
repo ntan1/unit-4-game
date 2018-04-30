@@ -4,7 +4,7 @@
 }
 
 body {
-    /* font-family: "OptimusPrinceps", 'MedievalSharp', cursive; */
+    font-family: "OptimusPrinceps", 'MedievalSharp', cursive;
     /* color: white; */
     /* background-color: black; */
     /* background-color: #100f10; */
@@ -34,6 +34,10 @@ figcaption {
     color: white;
     width: 100%;
     text-align: center;
+}
+
+.flavour-text {
+    font-family: times;
 }
 
 .character {
