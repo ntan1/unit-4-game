@@ -94,13 +94,13 @@ $(document).ready(function () {
     // delegate parent to find created button rather than button itself cause can't target created elements directly
     $("#board").on("click", "#attack-button", function () {
         if (opponent && mainChar.hp > 0) {
-            $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage");
-            $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage");
+            $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage.");
+            $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage.");
             fight();
         } else if (mainChar.hp <= 0) {
-            $("#atkText").text("You have lost.");
+            $("#atkText").text("You are dead.");
         } else {
-            $("#atkText").text("No opponent found");
+            $("#atkText").text("No opponent found.");
         }
         updateBoard();
     });
@@ -112,7 +112,6 @@ $(document).ready(function () {
         mainChar.numOfAttacks++;
         if (mainChar.hp <= 0) { // you died
             mainChar.hp = 0;
-            console.log("you lose");
             fightMusic.animate({ volume: 0 }, 1000);
             fightMusic.trigger("pause");
             mainChar.audio.lose.play();
@@ -124,7 +123,6 @@ $(document).ready(function () {
             }, 2000);
         }
         if (opponent.hp <= 0) { // killed opponent
-            console.log(opponent.name + " has been defeated");
             opponent.hp = 0;
             mainChar.audio.win.play();
             mainChar.audio.win.currentTime = 0;
@@ -134,7 +132,7 @@ $(document).ready(function () {
                 opacity: 1
             }, 1500,
                 function () {
-                    $("#victory").animate({
+                    $("#victory").stop(true, false).animate({
                         opacity: 0
                     }, 1500);
                 });
