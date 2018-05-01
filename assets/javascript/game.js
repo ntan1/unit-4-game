@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     // find shorter length
     var fightMusic = $("#fight-music");
-    fightMusic[0].volume = 0.3;
+    fightMusic[0].volume = 0.2;
     // fightMusic.play();
     var char7 = $("#char7");
 
