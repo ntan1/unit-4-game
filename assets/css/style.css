@@ -16,6 +16,7 @@ body {
 figure {
     position: relative;
     overflow: hidden;
+    border: 2px solid rgb(247, 213, 17);
 }
 
 figure img, figcaption {
