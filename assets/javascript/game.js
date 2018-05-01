@@ -59,6 +59,7 @@ $(document).ready(function () {
             // not working as intended yet on animate, css() no problem
             $.data(this, 'cHeight', $this.find("figcaption").outerHeight());
             $(this).find("figcaption").stop(true, false).css({
+                "line-height": "1.5em",
                 height: '100%'
             });
             $(this).find(".flavour-text").show();
@@ -79,13 +80,14 @@ $(document).ready(function () {
             $(this).hide();
             $(".arena").append(this);
             $(this).show("normal");
-            $("#select").fadeOut(1);
-            $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
+            $("#character-selection").slideUp(1000);
+            // $("#select").fadeOut(1);
+            // $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
             console.log("Your opponent is " + opponent.name);
         } else if (!mainChar) {
             mainChar = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
             $(this).addClass("attacker");
-            $(this).append("<button id='attack-button'>Attack</button>");
+            // $(this).append("<button id='attack-button'>Attack</button>");
             $(this).hide();
             $(".arena").append(this);
             $(this).show("normal");
@@ -117,7 +119,6 @@ $(document).ready(function () {
         if (mainChar.hp <= 0) { // you died
             mainChar.hp = 0;
             fightMusic.animate({ volume: 0 }, 1000);
-            fightMusic.trigger("pause");
             mainChar.audio.lose.play();
             // mainChar.audio.lose.currentTime = 0;
             $("#died").css({ display: "block" });
@@ -135,13 +136,16 @@ $(document).ready(function () {
             $("#victory").animate({
                 opacity: 1
             }, 1500,
-                function () {
-                    $("#victory").stop(true, false).animate({
-                        opacity: 0
-                    }, 1500);
+            function () {
+                $("#victory").stop(true, false).animate({
+                    opacity: 0
+                }, 1500, function() {
+                    $("#victory").css({ display: "none" });
                 });
+            });
             opponent = "";
             $(".defender").remove();
+            $("#character-selection").slideDown(1000);
         }
     }
 
@@ -150,5 +154,11 @@ $(document).ready(function () {
         $(".attacker").find(".hp").text(mainChar.hp);
         $(".defender").find(".hp").text(opponent.hp);
     }
+
+    $("#vol-control").on("click", function() {
+        var muted = fightMusic.prop("muted");
+        $(this).toggleClass("fa-volume-up fa-volume-off");
+        fightMusic.prop("muted", !muted);
+    });
 });
 

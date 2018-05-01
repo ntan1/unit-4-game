@@ -10,20 +10,23 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 </head>
 
 <body id="main">
-    <img class="background-fire" src="assets/images/fire-animated-gif-4.gif">
+    <!-- <img class="background-fire" src="assets/images/fire-animated-gif-4.gif"> -->
     <div class="header container-fluid">
         <div class="row">
             <h1>Dark Souls Game</h1>
-            <div class="col-sm-4 col-md-2 ml-auto text-center">
+            <!-- <div class="col-sm-4 col-md-2 ml-auto text-center">
                 <button id="bonfire">
                     <img class="" src="assets/images/Bonfire_black_bg.gif" alt="click to restart">
                 </button>
-            </div>
+            </div> -->
+            <i id="vol-control" class="fa fa-volume-up"></i>
         </div>
     </div>
     <div id="died" class="msg death-msg">YOU DIED</div>
@@ -33,15 +36,15 @@
             <h1>Instructions</h1>
             <p>Select character. Press attack button. Win.</p>
         </div>
-        <!-- <div id="game-board"> -->
         <div id="character-selection">
             <h2 id="select">Select Your Character</h2>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div id="char1" class="character col-sm-6 col-md-6 col-lg-3" data-hp="20" data-attack="5" data-name="The Pursuer">
                     <figure>
                         <img src="assets/images/Pursuer.jpg">
                         <figcaption>
-                            <div class="flavour-text">A silent, hulking knight with a tendency to fall into battle from the talons of a massive bird. Will not rest until his target is slain.</div>
+                            <div class="flavour-text">A silent, hulking knight with a tendency to fall into battle from the talons of a massive bird.
+                                Will not rest until his target is slain.</div>
                         </figcaption>
                     </figure>
                 </div>
@@ -49,7 +52,8 @@
                     <figure>
                         <img src="assets/images/Smelter_Demon.jpg">
                         <figcaption>
-                            <div class="flavour-text">A creature that rose from the infernal depths of the earth. Haunts the castle that sunk into a pool of iron.</div>
+                            <div class="flavour-text">A creature that rose from the infernal depths of the earth. Haunts the castle that sunk into 
+                                a pool of iron.</div>
                         </figcaption>
                     </figure>
                 </div>
@@ -57,7 +61,8 @@
                     <figure>
                         <img src="assets/images/yhorm.jpg">
                         <figcaption>
-                            <div class="flavour-text">Yhorm is the descendant of an ancient conqueror, but was asked by the very people once subjugated to lead them, serving as both a weighty blade and a stone-hard shield.</div>
+                            <div class="flavour-text">Yhorm is the descendant of an ancient conqueror, but was asked by the very people once subjugated
+                                to lead them, serving as both a weighty blade and a stone-hard shield.</div>
                         </figcaption>
                     </figure>
                 </div>
@@ -73,16 +78,22 @@
         </div>
         <div class="board">
             <h1>Arena</h1>
-            <div class="row text-center arena">
+            <hr>
+            <div class="row text-center arena justify-content-center">
             </div>
+            <button id='attack-button'>Attack</button>
             <div id="attack-report">
                 <div id="atkText"></div>
                 <div id="cntrAtkText"></div>
             </div>
         </div>
-        <audio id="fight-music" type="audio/mp3" controls loop src="assets/sounds/Looking Glass Knight.mp3"></audio>
-        <!-- </div> -->
+        <audio id="fight-music" type="audio/mp3" autoplay loop src="assets/sounds/Looking Glass Knight.mp3"></audio>
     </div>
+    <!-- <div class="bg-bonfire">
+        <button id="bonfire">
+            <img class="" src="assets/images/Bonfire_black_bg.gif" alt="click to restart">
+        </button>
+    </div> -->
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script> -->

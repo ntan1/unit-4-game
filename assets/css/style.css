@@ -5,18 +5,20 @@
 
 body {
     font-family: "OptimusPrinceps", 'MedievalSharp', cursive;
+    text-align: center;
     /* color: white; */
     /* background-color: black; */
     /* background-color: #100f10; */
     /* background-color: #100e0e; */
     background-color: #040204;
+    /* background-color: black; */
     color: blanchedalmond;
 }
 
 figure {
     position: relative;
     overflow: hidden;
-    border: 2px solid rgb(247, 213, 17);
+    border: 2px solid #dab814;
 }
 
 figure img, figcaption {
@@ -43,10 +45,25 @@ figcaption {
 }
 
 .background-fire {
-    position: absolute;
+    position: fixed;
     width: 50%;
     z-index: -1;
     transform: rotate(180deg);
+}
+
+.bg-bonfire {
+    position: absolute;
+    bottom: 0;
+    right: -120px;
+    z-index:-100;
+}
+
+#vol-control {
+    font-size: 2em;
+    opacity: 0.8;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
 }
 
 .character {
@@ -57,6 +74,17 @@ figcaption {
     display: none;
     font-style: italic;
     font-size: 0.8em;
+}
+
+#attack-button {
+    background-color: #6b6363;
+    padding: 10px;
+    color: blanchedalmond;
+    cursor: pointer
+}
+
+#attack-report {
+    margin: 20px;
 }
 
 .msg {
