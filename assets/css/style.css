@@ -2,6 +2,9 @@
     font-family: "OptimusPrinceps";
     src: url('../fonts/OptimusPrinceps.ttf') format("truetype");
 }
+h1 {
+    color: #d67800;
+}
 
 body {
     font-family: "OptimusPrinceps", 'MedievalSharp', cursive;
@@ -15,10 +18,21 @@ body {
     color: blanchedalmond;
 }
 
+.header img{
+    position: relative;
+    top: -20%;
+}
+
+#board {
+    position: relative;
+    top: -200px;
+}
+
 figure {
     position: relative;
     overflow: hidden;
     border: 2px solid #dab814;
+    max-height: 270px;
 }
 
 figure img, figcaption {
@@ -35,9 +49,10 @@ figcaption {
     bottom: 0px;
     padding: 10px;
     background-color: rgb(0, 0, 0, 0.6);
-    color: white;
+    color: blanchedalmond;
     width: 100%;
     text-align: center;
+    font-size: 1.2em;
 }
 
 .flavour-text {
@@ -62,7 +77,8 @@ figcaption {
     font-size: 2em;
     opacity: 0.8;
     position: absolute;
-    right: 5px;
+    right: 10px;
+    top: 5px;
     cursor: pointer;
 }
 
@@ -72,8 +88,16 @@ figcaption {
 
 .flavour-text {
     display: none;
-    font-style: italic;
+    /* font-style: italic; */
     font-size: 0.8em;
+}
+
+.green-text {
+    color: #74fd74;
+}
+
+.red-text {
+    color: #ff0000;
 }
 
 #attack-button {
@@ -122,4 +146,10 @@ figcaption {
 
 #bonfire img {
     width: 100%;
+}
+
+@media screen and (max-width: 1056px) {
+    .header img {
+        width: 100%;
+    }
 }

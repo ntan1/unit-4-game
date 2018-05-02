@@ -19,8 +19,11 @@
 <body id="main">
     <!-- <img class="background-fire" src="assets/images/fire-animated-gif-4.gif"> -->
     <div class="header container-fluid">
-        <div class="row">
-            <h1>Dark Souls Game</h1>
+        <div class="row justify-content-center">
+            <!-- <h1>Dark Souls</h1> -->
+            <div class="col-sm-12">
+                <img style="background-color: #040204;" src="assets/images/ds_logo.png">
+            </div>
             <!-- <div class="col-sm-4 col-md-2 ml-auto text-center">
                 <button id="bonfire">
                     <img class="" src="assets/images/Bonfire_black_bg.gif" alt="click to restart">
@@ -34,10 +37,10 @@
     <div id="board" class="container">
         <div class="instructions">
             <h1>Instructions</h1>
-            <p>Select character. Press attack button. Win.</p>
+            <p>Select a character. Press attack button. Win.</p>
         </div>
         <div id="character-selection">
-            <h2 id="select">Select Your Character</h2>
+            <h1 id="select">Select Your Character</h1>
             <div class="row justify-content-center">
                 <div id="char1" class="character col-sm-6 col-md-6 col-lg-3" data-hp="20" data-attack="5" data-name="The Pursuer">
                     <figure>
@@ -76,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="board">
+        <div class="fighting-board">
             <h1>Arena</h1>
             <button id='attack-button'>Attack</button>
             <div id="attack-report">

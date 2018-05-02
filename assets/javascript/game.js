@@ -3,11 +3,14 @@
 // To do: bonfire responsive
 // To do: consistent image sizes
 // To do: arena styling, text
+// To do: fix logo, shorten transparent logo
 
 $(document).ready(function () {
     var mainChar = "";
     var opponent = "";
-    
+    var charRemaining = $("#character-selection").find(".character").length;
+    console.log(charRemaining);
+
     function Character(name, hp, attack) {
         if (!(this instanceof Character)) { // scope-safe constructor in case called without new
             return new Character(name, hp, attack);
@@ -33,9 +36,9 @@ $(document).ready(function () {
     }
 
     // set name and hp text on characters from data attributes
-    $("#character-selection").find(".character").each(function() {
+    $("#character-selection").find(".character").each(function () {
         console.log($(this).data("name"));
-        var hpText = "<div class='hp'>" + $(this).data("hp") + "</div>"
+        var hpText = "<div class='hp green-text'>" + $(this).data("hp") + " hp</div>"
         $(this).find("figcaption").prepend($(this).data("name") + hpText);
     });
 
@@ -73,9 +76,12 @@ $(document).ready(function () {
         }
     );
 
+    // handles attacker and opponent selection
     $("#character-selection").on("click", ".character", function () {
         if (mainChar && !opponent) {
+            charRemaining--;
             opponent = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
+            $(this).find("figure").css({ "border-color": "#bd0000" });
             $(this).addClass("defender");
             $(this).hide();
             $(".arena").append(this);
@@ -83,9 +89,10 @@ $(document).ready(function () {
             $("#character-selection").slideUp(1000);
             // $("#select").fadeOut(1);
             // $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
-            console.log("Your opponent is " + opponent.name);
         } else if (!mainChar) {
+            charRemaining--;
             mainChar = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
+            $(this).find("figure").css({ "border-color": "#028202" });
             $(this).addClass("attacker");
             // $(this).append("<button id='attack-button'>Attack</button>");
             $(this).hide();
@@ -93,15 +100,14 @@ $(document).ready(function () {
             $(this).show("normal");
             $("#select").fadeOut(1);
             $("#select").text("Select an opponent").stop(true, true).fadeIn(1000);
-            console.log("You chose " + mainChar.name);
         }
     });
 
     // delegate parent to find created button rather than button itself cause can't target created elements directly
     $("#board").on("click", "#attack-button", function () {
         if (opponent && mainChar.hp > 0) {
-            $("#atkText").text("You attacked " + opponent.name + " for " + mainChar.getAtkPwr() + " damage.");
-            $("#cntrAtkText").text(opponent.name + " attacked you for " + opponent.getAtkPwr() + " damage.");
+            $("#atkText").html("You attacked " + opponent.name + " for <span class='green-text'>" + mainChar.getAtkPwr() + "</span> damage.");
+            $("#cntrAtkText").html(opponent.name + " attacked you for <span class='red-text'>" + opponent.getAtkPwr() + "</span> damage.");
             fight();
         } else if (mainChar.hp <= 0) {
             $("#atkText").text("You are dead.");
@@ -136,26 +142,40 @@ $(document).ready(function () {
             $("#victory").animate({
                 opacity: 1
             }, 1500,
-            function () {
-                $("#victory").stop(true, false).animate({
-                    opacity: 0
-                }, 1500, function() {
-                    $("#victory").css({ display: "none" });
+                function () {
+                    $("#victory").stop(true, false).animate({
+                        opacity: 0
+                    }, 1500, function () {
+                        // $("#victory").css({ display: "none" });
+                    });
                 });
-            });
             opponent = "";
             $(".defender").remove();
-            $("#character-selection").slideDown(1000);
+            if (charRemaining > 0) {
+                $("#character-selection").slideDown(1000);
+            } else {
+                $("#victory").text("Victory Achieved");
+                $("#victory").css({ display: "block" });
+                $("#victory").animate({
+                    opacity: 1
+                }, 1500);
+            }
         }
     }
 
     // update hp text
     function updateBoard() {
-        $(".attacker").find(".hp").text(mainChar.hp);
-        $(".defender").find(".hp").text(opponent.hp);
+        if (mainChar.hp / $(".attacker").data("hp") <= 0.5) {
+            $(".attacker").find(".hp").css({ color: "#ff0000" });
+        }
+        if (opponent.hp / $(".defender").data("hp") <= 0.5) {
+            $(".defender").find(".hp").css({ color: "#ff0000" });
+        }
+        $(".attacker").find(".hp").text(mainChar.hp + " hp");
+        $(".defender").find(".hp").text(opponent.hp + " hp");
     }
 
-    $("#vol-control").on("click", function() {
+    $("#vol-control").on("click", function () {
         var muted = fightMusic.prop("muted");
         $(this).toggleClass("fa-volume-up fa-volume-off");
         fightMusic.prop("muted", !muted);
