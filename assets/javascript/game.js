@@ -146,7 +146,7 @@ $(document).ready(function () {
                     $("#victory").stop(true, false).animate({
                         opacity: 0
                     }, 1500, function () {
-                        // $("#victory").css({ display: "none" });
+                        $("#victory").css({ display: "none" });
                     });
                 });
             opponent = "";
