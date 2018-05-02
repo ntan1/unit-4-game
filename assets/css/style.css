@@ -18,16 +18,6 @@ body {
     color: blanchedalmond;
 }
 
-.header img{
-    position: relative;
-    top: -20%;
-}
-
-#board {
-    position: relative;
-    top: -200px;
-}
-
 figure {
     position: relative;
     overflow: hidden;
@@ -116,7 +106,7 @@ figcaption {
     position: fixed;
     display: none;
     opacity: 0;
-    top: 30%;
+    top: 40%;
     margin: auto;
     z-index: 100;
     width: 100%;
