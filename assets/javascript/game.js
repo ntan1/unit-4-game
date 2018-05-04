@@ -21,7 +21,6 @@ $(document).ready(function () {
         this.numOfAttacks = 1;
         this.audio = {
             lose: new Audio("assets/sounds/Dark Souls Death.mp3"),
-            // win: new Audio("assets/sounds/Dark Souls Estus Flask.mp3")
             win: new Audio("assets/sounds/ds3va.mp3"),
             complete: new Audio("assets/sounds/vg.mp3")
         };
@@ -45,7 +44,6 @@ $(document).ready(function () {
     // find shorter length
     var fightMusic = $("#fight-music");
     fightMusic[0].volume = 0.2;
-    // fightMusic.play();
     var char7 = $("#char7");
 
     // refresh page when bonfire clicked
@@ -87,14 +85,11 @@ $(document).ready(function () {
             $(".arena").append(this);
             $(this).show("normal");
             $("#character-selection").slideUp(1000);
-            // $("#select").fadeOut(1);
-            // $("#select").text("Select an opponent").stop(true, false).fadeIn(1000);
         } else if (!mainChar) {
             charRemaining--;
             mainChar = new Character($(this).data("name"), $(this).data("hp"), $(this).data("attack"));
             $(this).find("figure").css({ "border-color": "#028202" });
             $(this).addClass("attacker");
-            // $(this).append("<button id='attack-button'>Attack</button>");
             $(this).hide();
             $(".arena").append(this);
             $(this).show("normal");

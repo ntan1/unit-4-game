@@ -9,12 +9,9 @@ h1 {
 body {
     font-family: "OptimusPrinceps", 'MedievalSharp', cursive;
     text-align: center;
-    /* color: white; */
-    /* background-color: black; */
     /* background-color: #100f10; */
     /* background-color: #100e0e; */
     background-color: #040204;
-    /* background-color: black; */
     color: blanchedalmond;
 }
 
@@ -29,10 +26,6 @@ figure img, figcaption {
     width: 100%;
     cursor: pointer;
 }
-
-/* figure:hover > figcaption {
-    
-} */
 
 figcaption {
     position: absolute;
@@ -78,7 +71,6 @@ figcaption {
 
 .flavour-text {
     display: none;
-    /* font-style: italic; */
     font-size: 0.8em;
 }
 
